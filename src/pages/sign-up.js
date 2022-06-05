@@ -41,7 +41,12 @@ export default function SignUp() {
 
         history.push(ROUTES.DASHBOARD);
 
-      } catch (errors) {}
+      } catch (errors) {
+        setFullName('');
+        setEmailAddress('');
+        setPassword('');
+        setError(error.message);
+      }
     } 
   };
 
