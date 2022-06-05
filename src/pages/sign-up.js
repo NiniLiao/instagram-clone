@@ -2,6 +2,7 @@ import { useState, useContext, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import FirebaseContext from '../context/firebase';
 import * as ROUTES from '../constants/routes';
+import { doesUsernameExist } from '../services/firebase';
 
 export default function SignUp() {
   const history = useNavigate();
@@ -18,9 +19,19 @@ export default function SignUp() {
   const handleSignUp = async (event) => {
     event.preventDefault();
 
-    // try {
-    // } catch (error) {
-    // }
+    const usernameExists = await doesUsernameExist(username);
+    if (usernameExists) {
+      try {
+       const createdUserResult = await firebase
+         .auth()
+         .createUserWithEmailAndPassword(emailAddress, password);
+
+        await createdUserResult.user.updateProfile({
+          displayName: username
+        })  
+
+      } catch (errors) {}
+    } 
   };
 
   useEffect(() => {
