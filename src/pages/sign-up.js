@@ -28,7 +28,18 @@ export default function SignUp() {
 
         await createdUserResult.user.updateProfile({
           displayName: username
-        })  
+        });  
+
+        await firebase.firestore().collection('users').add({
+          userId: createdUserResult.user.uid,
+          username: username.toLowerCase(),
+          fullname,
+          emailAddress: emailAddress.toLowerCase(),
+          following: [],
+          dateCreated: Date.now()
+        });
+
+        history.push(ROUTES.DASHBOARD);
 
       } catch (errors) {}
     } 
