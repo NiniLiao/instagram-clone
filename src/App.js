@@ -5,7 +5,6 @@ import Post from './Post';
 function App() {
   return (
     <div className="App">
-            
       <div className="app__header">
         <img
           className="app__headerImage"
@@ -16,6 +15,8 @@ function App() {
     
       <h1>Hello Clever Programmer, Let's build an Instagram Clone with React</h1>
       
+      <Post />
+      <Post />
       <Post />
     
     </div>
